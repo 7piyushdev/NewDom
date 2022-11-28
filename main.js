@@ -1,11 +1,15 @@
 var form = document.getElementById("addForm");
 var itemList = document.getElementById("items");
+var filter = document.getElementById("filter");
 
 // Form submit event
 form.addEventListener("submit", addItem);
 
 // delete event
-itemList.addEventListener('click', removeItem)
+itemList.addEventListener("click", removeItem);
+
+//filter event
+filter.addEventListener("keyup", filterItems);
 
 // Add item
 function addItem(e) {
@@ -13,6 +17,7 @@ function addItem(e) {
 
   // Get input value
   var newItem = document.getElementById("item").value;
+  var newDescription = document.getElementById("description").value;
 
   //create new li item
 
@@ -22,6 +27,7 @@ function addItem(e) {
   //Add textNode with input value
 
   li.appendChild(document.createTextNode(newItem));
+  li.appendChild(document.createTextNode(newDescription));
 
   //create the delete button
 
@@ -31,12 +37,12 @@ function addItem(e) {
   deleteBtn.appendChild(document.createTextNode("X"));
 
   //create edit button
-  var editBtn = document.createElement('button')
-  editBtn.className = "btn btn-primary btn-sm rounded-0"
+  var editBtn = document.createElement("button");
+  editBtn.className = "btn btn-primary btn-sm rounded-0";
 
-  editBtn.appendChild(document.createTextNode("E"))
+  editBtn.appendChild(document.createTextNode("E"));
 
-  li.appendChild(editBtn)
+  li.appendChild(editBtn);
 
   //append button to li
   li.appendChild(deleteBtn);
@@ -47,11 +53,34 @@ function addItem(e) {
 
 // Remove Item on delete button
 
-function removeItem(e){
-    if(e.target.classList.contains('delete')){
-        if(confirm('Are you sure ?')){
-            var li = e.target.parentElement;
-            itemList.removeChild(li);
-        }
+function removeItem(e) {
+  if (e.target.classList.contains("delete")) {
+    if (confirm("Are you sure ?")) {
+      var li = e.target.parentElement;
+      itemList.removeChild(li);
     }
+  }
+}
+
+//filter items function
+
+function filterItems(e) {
+  //convert texts to lowercase
+  var text = e.target.value.toLowerCase();
+
+  //get Lists(li's)
+  var items = document.getElementsByTagName("li");
+
+
+  //convert to an array
+  Array.from(items).forEach(function (item) {
+    var itemName = item.firstChild.textContent;
+    var descriptions = item.childNodes[1].textContent
+    
+  if(itemName.toLocaleLowerCase().indexOf(text) != -1 || descriptions.toLocaleLowerCase().indexOf(text) != -1 ){
+    item.style.display = 'block'
+  }else{
+    item.style.display = 'none'
+  }
+  });
 }
