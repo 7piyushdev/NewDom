@@ -19,6 +19,9 @@ function addItem(e) {
   var newItem = document.getElementById("item").value;
   var newDescription = document.getElementById("description").value;
 
+  localStorage.setItem('item', newItem)
+  localStorage.setItem('description', newDescription)
+
   //create new li item
 
   var li = document.createElement("li");
@@ -71,16 +74,20 @@ function filterItems(e) {
   //get Lists(li's)
   var items = document.getElementsByTagName("li");
 
-
   //convert to an array
   Array.from(items).forEach(function (item) {
     var itemName = item.firstChild.textContent;
-    var descriptions = item.childNodes[1].textContent
-    
-  if(itemName.toLocaleLowerCase().indexOf(text) != -1 || descriptions.toLocaleLowerCase().indexOf(text) != -1 ){
-    item.style.display = 'block'
-  }else{
-    item.style.display = 'none'
-  }
+
+    var descriptions = item.childNodes[1].textContent;
+
+    if (
+      itemName.toLocaleLowerCase().indexOf(text) != -1 ||
+      descriptions.toLocaleLowerCase().indexOf(text) != -1
+    ) {
+      item.style.display = "block";
+    } else {
+      item.style.display = "none";
+    }
   });
 }
+
