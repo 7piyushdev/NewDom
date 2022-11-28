@@ -30,6 +30,14 @@ function addItem(e) {
 
   deleteBtn.appendChild(document.createTextNode("X"));
 
+  //create edit button
+  var editBtn = document.createElement('button')
+  editBtn.className = "btn btn-primary btn-sm rounded-0"
+
+  editBtn.appendChild(document.createTextNode("E"))
+
+  li.appendChild(editBtn)
+
   //append button to li
   li.appendChild(deleteBtn);
 
