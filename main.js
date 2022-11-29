@@ -19,8 +19,16 @@ function addItem(e) {
   var newItem = document.getElementById("item").value;
   var newDescription = document.getElementById("description").value;
 
-  localStorage.setItem('item', newItem)
-  localStorage.setItem('description', newDescription)
+  // localStorage.setItem('item', newItem)
+  // localStorage.setItem('description', newDescription)
+
+  let obj = {
+    itemN: newItem,
+    decpt: newDescription
+  }
+  let strObj = JSON.stringify(obj)
+
+  console.log(localStorage.setItem('obj', strObj));
 
   //create new li item
 
@@ -45,9 +53,10 @@ function addItem(e) {
 
   editBtn.appendChild(document.createTextNode("E"));
 
+ //append editbutton to li
   li.appendChild(editBtn);
 
-  //append button to li
+  //append deletebutton to li
   li.appendChild(deleteBtn);
 
   //append li to list
