@@ -28,7 +28,7 @@ function addItem(e) {
   }
   let strObj = JSON.stringify(obj)
 
-  console.log(localStorage.setItem('obj', strObj));
+  console.log(localStorage.setItem(obj.decpt, strObj));
 
   //create new li item
 
@@ -67,7 +67,7 @@ function addItem(e) {
 
 function removeItem(e) {
   if (e.target.classList.contains("delete")) {
-    if (confirm("Are you sure ?")) {
+    if (confirm("Are you sure you want to delete?")) {
       var li = e.target.parentElement;
       itemList.removeChild(li);
     }
@@ -99,4 +99,3 @@ function filterItems(e) {
     }
   });
 }
-
